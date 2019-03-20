@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.Teacher">
+    <id column="Tno" jdbcType="VARCHAR" property="tno" />
+    <result column="Tname" jdbcType="VARCHAR" property="tname" />
+    <result column="Tsex" jdbcType="VARCHAR" property="tsex" />
+    <result column="Tbirthday" jdbcType="TIMESTAMP" property="tbirthday" />
+    <result column="Prof" jdbcType="VARCHAR" property="prof" />
+    <result column="Depart" jdbcType="VARCHAR" property="depart" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Tno, Tname, Tsex, Tbirthday, Prof, Depart
+  </sql>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.Teacher">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tno != null">
+        Tno,
+      </if>
+      <if test="tname != null">
+        Tname,
+      </if>
+      <if test="tsex != null">
+        Tsex,
+      </if>
+      <if test="tbirthday != null">
+        Tbirthday,
+      </if>
+      <if test="prof != null">
+        Prof,
+      </if>
+      <if test="depart != null">
+        Depart,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tno != null">
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null">
+        #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="tbirthday != null">
+        #{tbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null">
+        #{prof,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null">
+        #{depart,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.Teacher">
+    update teacher
+    <set>
+      <if test="tname != null">
+        Tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null">
+        Tsex = #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="tbirthday != null">
+        Tbirthday = #{tbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null">
+        Prof = #{prof,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null">
+        Depart = #{depart,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </update>
+</mapper>

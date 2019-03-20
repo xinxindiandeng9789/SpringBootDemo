@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.Course">
+    <id column="Cno" jdbcType="CHAR" property="cno" />
+    <result column="Cname" jdbcType="VARCHAR" property="cname" />
+    <result column="Tno" jdbcType="VARCHAR" property="tno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Cno, Cname, Tno
+  </sql>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.Course">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cno != null">
+        Cno,
+      </if>
+      <if test="cname != null">
+        Cname,
+      </if>
+      <if test="tno != null">
+        Tno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cno != null">
+        #{cno,jdbcType=CHAR},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null">
+        #{tno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.Course">
+    update course
+    <set>
+      <if test="cname != null">
+        Cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null">
+        Tno = #{tno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Cno = #{cno,jdbcType=CHAR}
+  </update>
+</mapper>

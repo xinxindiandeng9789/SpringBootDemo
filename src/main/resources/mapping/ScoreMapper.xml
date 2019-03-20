@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ScoreMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.Score">
+    <id column="Sno" jdbcType="INTEGER" property="sno" />
+    <id column="Cno" jdbcType="CHAR" property="cno" />
+    <result column="Degree" jdbcType="DECIMAL" property="degree" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Sno, Cno, Degree
+  </sql>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.Score">
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sno != null">
+        Sno,
+      </if>
+      <if test="cno != null">
+        Cno,
+      </if>
+      <if test="degree != null">
+        Degree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sno != null">
+        #{sno,jdbcType=INTEGER},
+      </if>
+      <if test="cno != null">
+        #{cno,jdbcType=CHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.Score">
+    update score
+    <set>
+      <if test="degree != null">
+        Degree = #{degree,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where Sno = #{sno,jdbcType=INTEGER}
+      and Cno = #{cno,jdbcType=CHAR}
+  </update>
+</mapper>
