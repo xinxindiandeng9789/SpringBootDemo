@@ -52,6 +52,13 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- 添加thymeleaf 依赖包. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
 		<!-- 添加fastjson 依赖包. -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -108,6 +115,7 @@
 				<includes>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
+					<include>**/*.html</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>

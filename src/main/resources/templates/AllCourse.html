@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>AllCourses</title>
+</head>
+<body>
+    <table width="300" border="1" cellspacing="0">
+        <tr>
+            <th>课程编号</th>
+            <th>课程名</th>
+            <th>老师编号</th>
+        </tr>
+        <tr th:each="course:${courses}">
+            <td th:text="${course.cno}"></td>
+            <td th:text="${course.cname}"></td>
+            <td th:text="${course.tno}"></td>
+        </tr>
+    </table>
+</body>
+</html>

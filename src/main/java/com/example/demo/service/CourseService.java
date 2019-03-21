@@ -3,24 +3,28 @@ package com.example.demo.service;
 import com.example.demo.dao.CourseDao;
 import com.example.demo.pojo.Course;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class CourseService {
     @Autowired
     private CourseDao courseDao;
 
-    @RequestMapping(value = "/findCourse/{id}",produces = {"application/json;charset=UTF-8"})
-    public Course findCourse(@PathVariable("id") String id){
-        return courseDao.selectByPrimaryKey(id);
+    @RequestMapping("/findCourse/{id}")
+    public String findCourse(@PathVariable("id") String id, Model model) {
+        Course c = courseDao.selectByPrimaryKey(id);
+        model.addAttribute("Course", c);
+        return "displayCourse";
     }
 
-    @RequestMapping(value = "/findAllCourse",produces = {"application/json;charset=UTF-8"})
-    public List<Course> findAll(){
-        return courseDao.getAll();
+    @GetMapping("/findAllCourse")
+    public String findAll(Model model){
+        List<Course> allCourses = courseDao.getAll();
+        model.addAttribute("courses",allCourses);
+        return "AllCourse";
     }
 }
