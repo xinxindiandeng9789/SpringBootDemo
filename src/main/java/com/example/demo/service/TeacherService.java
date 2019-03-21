@@ -3,13 +3,16 @@ package com.example.demo.service;
 import com.example.demo.dao.TeacherDao;
 import com.example.demo.pojo.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class TeacherService {
     @Autowired
     private TeacherDao teacherDao;
@@ -19,14 +22,17 @@ public class TeacherService {
         return "this is my first SpringBoot Application";
     }
 
-    @RequestMapping(value = "/findTeacher/{id}",produces = {"application/json;charset=UTF-8"})
-    public Teacher findTeacher(@PathVariable("id") String id){
-        System.out.println(teacherDao.selectByPrimaryKey(id));
-        return teacherDao.selectByPrimaryKey(id);
+    @RequestMapping("/findTeacher/{id}")
+    public String findTeacher(@PathVariable("id") String id, Model model) {
+        Teacher t = teacherDao.selectByPrimaryKey(id);
+        model.addAttribute("Teacher", t);
+        return "displayTeacher";
     }
 
-    @RequestMapping(value = "/findAllTeacher",produces = {"application/json;charset=UTF-8"})
-    public List<Teacher> findAll(){
-        return teacherDao.getAll();
+    @GetMapping("/findAllTeacher")
+    public String findAll(Model model){
+        List<Teacher> allTeachers = teacherDao.getAll();
+        model.addAttribute("teachers",allTeachers);
+        return "AllTeacher";
     }
 }

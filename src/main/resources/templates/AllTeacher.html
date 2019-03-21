@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>AllTeachers</title>
+</head>
+<body>
+<table width="600" border="1" cellspacing="0">
+    <tr>
+        <th>教师编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>职称</th>
+        <th>所属部门</th>
+    </tr>
+    <tr th:each="teacher:${teachers}">
+        <td th:text="${teacher.tno}"></td>
+        <td th:text="${teacher.tname}"></td>
+        <td th:text="${teacher.tsex}"></td>
+        <td th:text="${teacher.tbirthday}"></td>
+        <td th:text="${teacher.prof}"></td>
+        <td th:text="${teacher.depart}"></td>
+    </tr>
+</table>
+</body>
+</html>
